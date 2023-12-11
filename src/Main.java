@@ -16,7 +16,24 @@ class Main {
      * @return the number of completed skills in the sorted array.
      */
     public static int numberOfCompletedSkills(int n, Skill[] skills) {
-        return -1;
+        int start = 1;
+        int end = n;
+        int mid = 0;
+        while (start < end) {
+            mid = (start + end) / 2;
+
+            if(skills[mid].isCompleted() == false) {
+                start = mid + 1;
+            } else if (skills[mid].isCompleted() == true) {
+                end = mid;
+            }
+        }
+        if (!skills[start].isCompleted()) { // edge case where there are no completed tasks
+            return 0; // No skills are completed.
+        } else {
+            // Skills are completed from 'start' to the end of the array.
+            return n - start + 1; // Return the count of completed skills, + 1 cause of one-indexing
+        }
     }
 }
 
